@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+scikit-learn
+pandas
+matplotlib
+seaborn
+joblib
+openai
+python-dotenv
+notebook
+jupyter
+faiss-cpu
+sentence-transformers
+imbalanced-learn
+

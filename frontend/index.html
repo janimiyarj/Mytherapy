@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MYTHERAPY — Mental Health Classification and Chat Support App</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" />
+
+  <style>
+    :root {
+      --bg: #f0f4f8;
+      --primary: #5b8def;
+      --accent: #50b87f;
+      --text: #2e3c50;
+      --muted: #6b7280;
+      --card-bg: #ffffff;
+      --border: #d0d7e2;
+      --radius: 14px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 60px auto;
+      padding: 32px;
+      background-color: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--border);
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 1.8rem;
+      margin-bottom: 1.8rem;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 130px;
+      padding: 14px;
+      font-size: 1rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      resize: vertical;
+      box-sizing: border-box;
+      background-color: #fcfcfd;
+      transition: border-color 0.3s ease;
+    }
+
+    textarea:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+
+    .btn {
+      padding: 12px 22px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      margin-top: 20px;
+      margin-right: 12px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      font-weight: 500;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn.predict {
+      background-color: var(--accent);
+      color: white;
+    }
+
+    .btn.predict:hover {
+      background-color: #3fa06c;
+      transform: translateY(-1px);
+    }
+
+    .btn.advice {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn.advice:hover {
+      background-color: #3f73d1;
+      transform: translateY(-1px);
+    }
+
+    #output {
+      margin-top: 30px;
+      background-color: #eef3fc;
+      border-left: 5px solid var(--primary);
+      padding: 20px;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    #spinner {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #spinner img {
+      width: 45px;
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Mental Health Assistant</h2>
+
+    <label for="inputText">Hi buddy, What’s bothering you?</label>
+    <textarea id="inputText" placeholder="e.g., I am constantly blaming myself and feels like a burden..."></textarea>
+
+    <div>
+      <button class="btn predict" onclick="getPrediction()">Predict Response Type</button>
+      <button class="btn advice" onclick="getAdvice()">Get AI Advice</button>
+    </div>
+
+    <!-- Spinner while waiting -->
+    <div id="spinner">
+      <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." />
+      <p style="margin-top: 8px;">Generating advice...</p>
+    </div>
+
+    <div id="output"></div>
+  </div>
+
+  <footer>
+    Built with ❤️ to support mental wellness | POC Edition
+  </footer>
+
+  <script>
+    const API_BASE = "http://localhost:8000";
+
+    async function getPrediction() {
+      const text = document.getElementById("inputText").value;
+      const res = await fetch(`${API_BASE}/predict`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ description: text })
+      });
+      const data = await res.json();
+      document.getElementById("output").innerText =
+        " Predicted Response Type:\n" + (data.predicted_response_type || data.error || "N/A");
+    }
+
+    async function getAdvice() {
+      const text = document.getElementById("inputText").value;
+      const spinner = document.getElementById("spinner");
+      const output = document.getElementById("output");
+
+      output.innerText = "";
+      spinner.style.display = "block";
+
+      try {
+        const res = await fetch(`${API_BASE}/advise`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ description: text })
+        });
+        const data = await res.json();
+        output.innerText =
+          " AI-Generated Advice:\n" + (data.advice || data.error || "N/A");
+      } catch (err) {
+        output.innerText = "Failed to fetch advice. Please try again.";
+      } finally {
+        spinner.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
