@@ -152,7 +152,7 @@ joblib
 jinja2
 
 
-### 8. Future Improvements
+## Future Improvements
 Deploy on cloud (e.g. Render, AWS, GCP, Azure)
 
 Improve frontend with React or Svelte
@@ -175,7 +175,7 @@ Monitor model performance using Prometheus and Grafana
 
 Automate retraining with cloud workflows (e.g., AWS Step Functions, GCP Workflows)
 
-### Contributors
+## Contributors
 Jani Miya Shaik — ML Engineering, Backend, Chatbot Design
 
 Collaborators welcome!
