@@ -2,6 +2,10 @@
 
 MYTHERAPY is an intelligent mental health support system that classifies user inputs into therapeutic categories (like *Directive*, *Emotional*, *Supportive*, etc.) using a machine learning model trained on real therapy data. It also integrates a Retrieval-Augmented Generation (RAG) chatbot to provide personalized, secure responses.
 
+
+<img width="2992" height="1548" alt="image" src="https://github.com/user-attachments/assets/240a955f-0d11-4a50-99d2-e06c3ec93ebf" />
+
+
 ---
 
 ##  Project Structure
@@ -89,6 +93,14 @@ cd app
 
 uvicorn main:app --reload
 
+### Demo Images for reference:
+
+<img width="2974" height="1640" alt="image" src="https://github.com/user-attachments/assets/a5d7f654-3473-474e-8158-8c6694a97296" />
+
+
+
+<img width="3004" height="1708" alt="image" src="https://github.com/user-attachments/assets/2a353778-2e09-4e8a-93aa-caa72c0d6c8b" />
+
 
 ### 5. Open Frontend
 
@@ -138,6 +150,7 @@ fastapi, uvicorn
 joblib
 
 jinja2
+
 
 ### 8. Future Improvements
 Deploy on cloud (e.g. Render, AWS, GCP, Azure)
