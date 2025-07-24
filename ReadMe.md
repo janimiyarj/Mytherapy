@@ -94,7 +94,7 @@ uvicorn main:app --reload
 
 Open frontend/index.html in a browser.
 
-### Model Details
+### 6. Model Details
 ### Vectorizer: TF-IDF
 
 Model: KMeans clustering
@@ -118,7 +118,7 @@ Create a .env file and add:
 Code:  
    OPENAI_API_KEY=your_openai_api_key
 
-####  Dependencies
+#### 7. Dependencies
 Install via:
 
 pip install -r requirements.txt
@@ -139,7 +139,7 @@ joblib
 
 jinja2
 
-#### Future Improvements
+#### 8. Future Improvements
 Deploy on cloud (e.g. Render, AWS)
 
 Improve frontend with React or Svelte
