@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel
 from app.openai_agent import generate_advice_with_rag
-from app.model import predict_response_type
+from app.model import predict_response_type, cluster_to_category
 from rag.rag_engine import retrieve_relevant_chunks
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
@@ -27,6 +27,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+RESPONSE_TYPE_LABELS = {
+    0: "Mild Distress",
+    1: "Moderate Distress",
+    2: "Severe Distress",
+    3: "Positive / Recovery",
+}
+
 # Pydantic Input Schema
 class PatientInput(BaseModel):
     description: str
@@ -44,17 +51,22 @@ async def root():
     </html>
     """
 
-# Predict Response Type
 @app.post("/predict")
 async def predict_response(data: PatientInput):
     logger.info(f"Received predict request: {data.description}")
     try:
         prediction = predict_response_type(data.description)
-        logger.info(f"Prediction result: {prediction}")
-        return {"predicted_response_type": prediction}
+        label = cluster_to_category.get(int(prediction), "Unknown")
+        logger.info(f"Prediction result: {prediction} → {label}")
+        return {
+            "predicted_cluster_id": int(prediction),
+            "category": label
+        }
     except Exception as e:
         logger.error(f"Prediction error: {e}")
         return JSONResponse(content={"error": str(e)}, status_code=500)
+
+
 
 
 # Smart RAG Advice (used by frontend "Get AI Advice" button)

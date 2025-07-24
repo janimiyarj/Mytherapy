@@ -152,7 +152,7 @@
   <div class="container">
     <h2>Mental Health Assistant</h2>
 
-    <label for="inputText">Hi buddy, What’s bothering you?</label>
+    <label for="inputText">We're here to support you. Feel free to share what's on your mind:</label>
     <textarea id="inputText" placeholder="e.g., I am constantly blaming myself and feels like a burden..."></textarea>
 
     <div>
@@ -184,8 +184,10 @@
         body: JSON.stringify({ description: text })
       });
       const data = await res.json();
-      document.getElementById("output").innerText =
-        " Predicted Response Type:\n" + (data.predicted_response_type || data.error || "N/A");
+      document.getElementById("output").innerHTML = `
+  <strong>Predicted Category:</strong> ${data.category} <br />
+  <strong>Cluster ID:</strong> ${data.predicted_cluster_id}
+  `;
     }
 
     async function getAdvice() {

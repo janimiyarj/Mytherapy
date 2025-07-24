@@ -3,6 +3,14 @@ import joblib
 import os
 import numpy as np
 
+cluster_to_category = {
+    0: "Directive",        # Seeks help or behavioral advice
+    1: "Cognitive",        # Analytical queries
+    2: "Emotional",        # Expressing confusion and feelings
+    3: "Supportive",       # Talking about therapy and shared experience
+    4: "High Distress",    # Serious anxiety, hallucinations, etc.
+    5: "Neutral"           # Informational/family context
+}
 # Load model and vectorizer (adjust path as needed)
 MODEL_PATH = os.path.join("model", "classifier.pkl")
 VECTORIZER_PATH = os.path.join("model", "vectorizer.pkl")
