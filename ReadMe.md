@@ -75,6 +75,8 @@ git clone https://github.com/your-username/mytherapy.git
 
 cd mytherapy
 
+---
+
 ### 2. Create Virtual Environment & Install Dependencies
 
 python3 -m venv .venv
@@ -83,15 +85,21 @@ source .venv/bin/activate
 
 pip install -r requirements.txt
 
+---
+
 ### 3. Train Model (Optional — already trained)
 
 jupyter notebook notebooks/data_analysis.ipynb
+
+---
 
 ### 4. Start Backend
 
 cd app
 
 uvicorn main:app --reload
+
+---
 
 ### Demo Images for reference:
 
@@ -106,10 +114,14 @@ uvicorn main:app --reload
 
 Open frontend/index.html in a browser.
 
+---
+
 ### 6. Model Details
 ### Vectorizer: TF-IDF
 
 Model: KMeans clustering
+
+---
 
 #### Clusters Mapped As:
 
@@ -122,6 +134,7 @@ cluster_to_category = {
     5: "Other"
 }
 
+---
 
 #### Environment Variables
 
@@ -129,6 +142,8 @@ Create a .env file and add:
 
 Code:  
    OPENAI_API_KEY=your_openai_api_key
+
+---
 
 ### 7. Dependencies
 Install via:
@@ -151,6 +166,7 @@ joblib
 
 jinja2
 
+---
 
 ## Future Improvements
 Deploy on cloud (e.g. Render, AWS, GCP, Azure)
@@ -175,10 +191,14 @@ Monitor model performance using Prometheus and Grafana
 
 Automate retraining with cloud workflows (e.g., AWS Step Functions, GCP Workflows)
 
+---
+
 ## Contributors
 Jani Miya Shaik — ML Engineering, Backend, Chatbot Design
 
 Collaborators welcome!
+
+---
 
 ## License
 MIT License — feel free to use, extend, and contribute.
