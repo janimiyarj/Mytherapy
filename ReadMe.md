@@ -6,7 +6,36 @@ MYTHERAPY is an intelligent mental health support system that classifies user in
 
 ##  Project Structure
 
-<pre> ``` MYTHERAPY/ ├── app/ # Backend logic (FastAPI/Flask-ready) │ ├── __init__.py │ ├── main.py # Main app entry point │ ├── model.py # Model loading and prediction │ └── openai_agent.py # OpenAI agent for RAG response │ ├── data/ │ └── train.csv # Original training data │ ├── frontend/ │ └── index.html # Simple front-end for user interaction │ ├── model/ │ ├── classifier.pkl # Trained KMeans classification model │ └── vectorizer.pkl # TF-IDF vectorizer used for feature extraction │ ├── notebooks/ │ └── data_analysis.ipynb # Model training and clustering notebook │ ├── rag/ │ ├── rag_builder.py # Prepares vector store for RAG │ ├── rag_engine.py # Embedding-based retrieval + chatbot response │ └── vectors/ │ ├── faiss_index.bin │ └── metadata.json │ ├── requirements.txt # Python dependencies ├── .env # Environment variables └── ReadMe.md # You're here! ``` </pre>
+MYTHERAPY/
+├── app/ # Backend logic (FastAPI/Flask-ready)
+│ ├── init.py
+│ ├── main.py # Main app entry point
+│ ├── model.py # Model loading and prediction
+│ └── openai_agent.py # OpenAI agent for RAG response
+│
+├── data/
+│ └── train.csv # Original training data
+│
+├── frontend/
+│ └── index.html # Simple front-end for user interaction
+│
+├── model/
+│ ├── classifier.pkl # Trained KMeans classification model
+│ └── vectorizer.pkl # TF-IDF vectorizer used for feature extraction
+│
+├── notebooks/
+│ └── data_analysis.ipynb # Model training and clustering notebook
+│
+├── rag/
+│ ├── rag_builder.py # Prepares vector store for RAG
+│ ├── rag_engine.py # Embedding-based retrieval + chatbot response
+│ └── vectors/
+│ ├── faiss_index.bin
+│ └── metadata.json
+│
+├── requirements.txt # Python dependencies
+├── .env # Environment variables
+└── ReadMe.md # You're here!
 
 
 ---
