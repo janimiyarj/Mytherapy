@@ -118,7 +118,7 @@ Create a .env file and add:
 Code:  
    OPENAI_API_KEY=your_openai_api_key
 
-#### 7. Dependencies
+### 7. Dependencies
 Install via:
 
 pip install -r requirements.txt
@@ -139,14 +139,28 @@ joblib
 
 jinja2
 
-#### 8. Future Improvements
-Deploy on cloud (e.g. Render, AWS)
+### 8. Future Improvements
+Deploy on cloud (e.g. Render, AWS, GCP, Azure)
 
 Improve frontend with React or Svelte
 
 Add sentiment analysis pipeline
 
 Extend to multilingual therapy
+
+Integrate MLOps best practices:
+
+Use MLflow or DVC for model versioning and experiment tracking
+
+Set up CI/CD pipelines with GitHub Actions or GitLab CI
+
+Containerize the app with Docker and orchestrate with Kubernetes
+
+Use Terraform or Pulumi for infrastructure as code (IaC)
+
+Monitor model performance using Prometheus and Grafana
+
+Automate retraining with cloud workflows (e.g., AWS Step Functions, GCP Workflows)
 
 ### Contributors
 Jani Miya Shaik — ML Engineering, Backend, Chatbot Design
